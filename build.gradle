@@ -1,0 +1,63 @@
+buildscript {
+    ext.kotlin_version = '1.3.61'
+    project.ext {
+        jvm_target = '1.8'
+
+        kotlin_version = '1.3.61'
+        minecraft_version = '1.12.2'
+        forge_version = '14.23.5.2815'
+        forge_plugin_version = '2.3.2-SNAPSHOT'
+        mappings_version = 'snapshot_20180609'
+        mod_version = '1.0'
+
+        root_build_dir = project.buildDir
+    }
+
+    ext.mod_id = 'technoblock'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url 'https://jitpack.io' }
+    }
+
+    dependencies {
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: kotlin_version
+        classpath group: 'com.github.Minecraft-Technocracy', name: 'ForgeGradle', version: forge_plugin_version
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'kotlin'
+
+minecraft {
+    version = "$project.minecraft_version-$project.forge_version"
+    runDir = "run"
+    mappings = project.mappings_version
+    makeObfSourceJar = false
+}
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("out")
+    }
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

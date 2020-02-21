@@ -1,0 +1,7 @@
+# IntelliJ and Compiler
+.idea/*
+build/
+out/
+
+# Gradle
+.gradle
